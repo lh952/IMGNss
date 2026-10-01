@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <title>Public Image Library</title>
+  <link rel="stylesheet" href="styles.css?v=20260930">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>Public Image Library</h1>
+    <p>Free image viewing and downloading</p>
+  </div>
+  <button id="openUpload" class="primary">Upload</button>
+</header>
+
+<main>
+  <section class="toolbar">
+    <input id="search" type="search" placeholder="Search images..." autocomplete="off">
+    <div id="cats" class="cats"></div>
+  </section>
+  <section id="gallery" class="gallery"></section>
+  <div id="empty" class="empty hidden">No images found.</div>
+</main>
+
+<div id="viewer" class="modal hidden">
+  <div class="modal-card viewer-card">
+    <button class="close" data-close="viewer">×</button>
+    <img id="viewerImg" alt="">
+    <div class="viewer-info">
+      <h2 id="viewerTitle"></h2>
+      <p id="viewerMeta"></p>
+      <a id="downloadBtn" class="primary download" href="#" target="_blank" rel="noopener">Download</a>
+    </div>
+  </div>
+</div>
+
+<div id="uploadModal" class="modal hidden">
+  <div class="modal-card upload-card">
+    <button class="close" data-close="uploadModal">×</button>
+    <h2>Upload Image</h2>
+    <p class="muted">Upload access requires the library password and a GitHub token with access only to this repository.</p>
+
+    <form id="uploadForm">
+      <label>Upload password
+        <input id="password" type="password" inputmode="numeric" required>
+      </label>
+
+      <div class="grid2">
+        <label>GitHub owner
+          <input id="owner" placeholder="username or organization" required>
+        </label>
+        <label>Repository
+          <input id="repo" placeholder="repository-name" required>
+        </label>
+      </div>
+
+      <label>Branch
+        <input id="branch" value="main" required>
+      </label>
+
+      <label>Fine-grained GitHub token
+        <input id="token" type="password" autocomplete="off" required>
+      </label>
+      <p class="hint">Token is used only for this upload and is not saved by this site.</p>
+
+      <div class="grid2">
+        <label>Title
+          <input id="title" placeholder="Image title" required>
+        </label>
+        <label>Category
+          <select id="category">
+            <option>Logos</option><option>Posters</option><option>Certificates</option>
+            <option>NSS</option><option>College</option><option>Events</option>
+            <option>Nature</option><option>Education</option><option>Others</option>
+          </select>
+        </label>
+      </div>
+
+      <label>Keywords
+        <input id="keywords" placeholder="e.g. NSS, college, event">
+      </label>
+
+      <label>Select image
+        <input id="file" type="file" accept="image/*" required>
+      </label>
+      <div id="fileInfo" class="file-info">No file selected</div>
+
+      <div class="progress-wrap">
+        <div class="progress-track"><div id="progress" class="progress"></div></div>
+        <div class="progress-row"><span id="progressText">Ready</span><span id="progressPercent">0%</span></div>
+      </div>
+
+      <div id="uploadStatus" class="status"></div>
+      <button id="uploadBtn" class="primary full" type="submit">Start Upload</button>
+    </form>
+  </div>
+</div>
+
+<script src="app.js?v=20260930" defer></script>
+</body>
+</html>
