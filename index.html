@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827"><title>IMGLibOpen</title>
+<link rel="stylesheet" href="styles.css?v=20261002-mobile2">
+</head>
+<body>
+<header class="topbar">
+  <h1>IMGLibOpen</h1>
+  <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">☰ <span>Menu</span></button>
+</header>
+
+<div id="menuBackdrop" class="menu-backdrop hidden"></div>
+<aside id="sideMenu" class="side-menu" aria-hidden="true">
+  <div class="menu-head"><strong>Menu</strong><button id="menuClose" class="icon-btn" aria-label="Close menu">×</button></div>
+  <button id="openUpload" class="menu-item">⇧ <span>Upload Images</span></button>
+  <button id="openDelete" class="menu-item">⚡ <span>Force</span></button>
+  <div class="menu-section">Mode</div>
+  <button id="normalMode" class="menu-item">☀ <span>Normal Mode</span></button>
+  <button id="darkMode" class="menu-item">☾ <span>Dark Mode</span></button>
+</aside>
+
+<main>
+  <section class="toolbar">
+    <div class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Search images, keywords or date..." autocomplete="off"></div>
+    <div id="tabs" class="tabs">
+      <button class="tab active" data-tab="All">All</button>
+      <button class="tab" data-tab="Activity">Activity</button>
+    </div>
+    <div class="controls">
+      <div id="cats" class="cats"></div>
+      <label class="sort-label">Image Order
+        <select id="sortOrder">
+          <option value="time-desc">Newest First</option>
+          <option value="time-asc">Oldest First</option>
+          <option value="name-asc">Image Name A–Z</option>
+          <option value="name-desc">Image Name Z–A</option>
+        </select>
+      </label>
+    </div>
+  </section>
+  <section id="activityBar" class="activity-bar hidden"></section>
+  <section id="gallery" class="gallery"></section>
+  <div id="empty" class="empty hidden">No images found.</div>
+</main>
+
+<div id="viewer" class="modal hidden">
+ <div class="modal-card viewer-card">
+  <button class="close" data-close="viewer" aria-label="Close">×</button>
+  <div class="viewer-image-wrap"><img id="viewerImg" alt=""><div id="viewerLoading" class="viewer-loading hidden">Preparing download…</div></div>
+  <div class="viewer-info">
+   <div class="viewer-heading"><div><h2 id="viewerTitle"></h2><p id="viewerMeta"></p></div><span id="viewerCategory" class="viewer-badge"></span></div>
+   <div class="viewer-actions"><button id="downloadBtn" class="primary" type="button">⬇ Download</button><button id="openOriginalBtn" class="secondary" type="button">↗ Original</button><button id="viewerDeleteBtn" class="icon-danger" type="button" aria-label="Force delete image" title="Force delete image">🗑</button></div>
+   <p id="downloadStatus" class="download-status"></p>
+  </div>
+ </div>
+</div>
+
+<div id="uploadModal" class="modal hidden">
+ <div class="modal-card">
+  <button class="close" data-close="uploadModal">×</button><h2>Upload Images</h2>
+  <p class="muted">Select one or multiple images. The same category and keywords can be applied to the whole batch.</p>
+  <form id="uploadForm">
+   <label>Password<input id="password" type="password" inputmode="numeric" required></label>
+   <label>Fine-grained GitHub Token<input id="token" type="password" autocomplete="off" required></label>
+   <div class="grid2">
+    <label>Category<select id="category"><option>Logos</option><option>Posters</option><option>Certificates</option><option>NSS</option><option>College</option><option>Events</option><option>Nature</option><option>Education</option><option>Others</option></select></label>
+    <label>Keywords<input id="keywords" placeholder="e.g. NSS, college, event"></label>
+   </div>
+   <label>Optional title prefix<input id="title" placeholder="Leave blank to use each file name"></label>
+   <label>Select images<input id="file" type="file" accept="image/*" multiple required></label>
+   <div id="fileInfo" class="file-info">No files selected</div>
+   <div class="progress-wrap"><div class="progress-track"><div id="progress" class="progress"></div></div><div class="progress-row"><span id="progressText">Ready</span><span id="progressPercent">0%</span></div></div>
+   <div id="uploadStatus" class="status"></div><button id="uploadBtn" class="primary full" type="submit">Start Upload</button>
+  </form>
+ </div>
+</div>
+
+<div id="deleteModal" class="modal hidden">
+ <div class="modal-card delete-card">
+  <button class="close" data-close="deleteModal">×</button><h2>Force</h2>
+  <p class="muted">Enter the password and token, then select one or multiple images to remove.</p>
+  <form id="deleteForm">
+   <label>Password<input id="deletePassword" type="password" inputmode="numeric" required></label>
+   <label>Fine-grained GitHub Token<input id="deleteToken" type="password" autocomplete="off" required></label>
+   <div id="deleteList" class="delete-list"></div>
+   <div id="deleteStatus" class="status"></div>
+   <button id="deleteBtn" class="danger full" type="submit">Force Delete</button>
+  </form>
+ </div>
+</div>
+<script src="app.js?v=20261002-mobile2" defer></script>
+</body></html>
